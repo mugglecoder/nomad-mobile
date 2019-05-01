@@ -14,7 +14,8 @@ const MainNavigation = createStackNavigator(
     }
   },
   {
-    mode: "card"
+    headerMode: "screen",
+    headerBackTitleVisible: false
   }
 );
 
