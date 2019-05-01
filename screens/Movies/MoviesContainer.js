@@ -30,7 +30,14 @@ export default class extends React.Component {
   }
 
   render() {
-    const { loading, upcoming, popular, nomPlaying } = this.state;
-    return <MoviesPresenter loading={loading} />;
+    const { loading, upcoming, popular, nowPlaying } = this.state;
+    return (
+      <MoviesPresenter
+        loading={loading}
+        upcoming={upcoming}
+        popular={popular}
+        nomPlaying={nowPlaying}
+      />
+    );
   }
 }

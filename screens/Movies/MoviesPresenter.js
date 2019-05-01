@@ -7,7 +7,10 @@ const MoviesPresenter = ({ loading }) =>
   loading ? <Loader /> : <Text>Movies</Text>;
 
 MoviesPresenter.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  upcoming: PropTypes.array,
+  popular: PropTypes.array,
+  nomPlaying: PropTypes.array
 };
 
 export default MoviesPresenter;
