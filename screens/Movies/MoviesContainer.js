@@ -14,13 +14,13 @@ export default class extends React.Component {
     let upcoming, popular, nowPlaying, error;
     try {
       ({
-        data: { result: upcoming }
+        data: { results: upcoming }
       } = await movies.getUpcoming());
       ({
-        data: { result: popular }
+        data: { results: popular }
       } = await movies.getPopular());
       ({
-        data: { result: nomPlaying }
+        data: { results: nowPlaying }
       } = await movies.getNowPlaying());
     } catch {
       error: "cant get movies";
@@ -36,7 +36,7 @@ export default class extends React.Component {
         loading={loading}
         upcoming={upcoming}
         popular={popular}
-        nomPlaying={nowPlaying}
+        nowPlaying={nowPlaying}
       />
     );
   }
