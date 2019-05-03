@@ -8,7 +8,6 @@ import MovieSlide from "./MovieSlide";
 const SWIPER_HEIGHT = Layout.height / 3;
 
 const View = styled.View`
-  background-color: red;
   height: ${SWIPER_HEIGHT};
 `;
 
@@ -20,6 +19,7 @@ const MovieSlider = ({ movies }) =>
       showsPagination={false}
       autoplay={true}
       style={{ height: SWIPER_HEIGHT }}
+      autoplayTimeout={3}
     >
       {movies
         .filter(movie => movie.backdrop_path !== null)
