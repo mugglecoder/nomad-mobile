@@ -16,14 +16,19 @@ const Title = styled.Text`
 
 const ScrollView = styled.ScrollView``;
 
-const Section = ({ title, children }) => (
+const Section = ({ title, children, horizontal = true }) => (
   <Container>
     <Title>{title}</Title>
-    <ScrollView horizontal={true}>{children}</ScrollView>
+    <ScrollView horizontal={horizontal}>{children}</ScrollView>
   </Container>
 );
 
 Section.prototype = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  horizontal: PropTypes.bool,
   title: PropTypes.string.isRequired
 };
 
