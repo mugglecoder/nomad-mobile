@@ -26,13 +26,11 @@ export default class extends React.Component {
       });
       try {
         ({
-          data: ({ results: movieResults } = await movies.searchMovies(
-            searchTerm
-          ))
-        });
+          data: { results: movieResults }
+        } = await movies.searchMovies(searchTerm));
         ({
-          data: ({ results: tvResults } = await tv.searchTv(searchTerm))
-        });
+          data: { results: tvResults }
+        } = await tv.searchTv(searchTerm));
       } catch {
         error = "Can't Search";
       } finally {
@@ -49,7 +47,6 @@ export default class extends React.Component {
 
   render() {
     const { loading, movieResults, tvResults, searchTerm } = this.state;
-    console.log(movieResults);
     return (
       <SearchPresenter
         loading={loading}

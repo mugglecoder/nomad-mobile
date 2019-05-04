@@ -29,6 +29,13 @@ const SearchResults = styled.ScrollView`
   margin-top: 20px;
 `;
 
+const FuckIt = styled.Text`
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: red;
+`;
+
 const SearchPresenter = ({
   loading,
   movieResults,
@@ -54,21 +61,42 @@ const SearchPresenter = ({
       ) : (
         <>
           {movieResults ? (
-            <Section title="Movie Result">
-              {movieResults
-                .filter(movie => movie.poster_path !== null)
-                .map(movie => (
-                  <MovieItem
-                    horizontal={true}
-                    key={movie.id}
-                    id={movie.id}
-                    posterPhoto={movie.poster_path}
-                    title={movie.title}
-                    overview={movie.overview}
-                    voteAvg={movie.vote_average}
-                  />
-                ))}
-            </Section>
+            movieResults.length > 0 ? (
+              <Section title="Movie Result">
+                {movieResults
+                  .filter(movie => movie.poster_path !== null)
+                  .map(movie => (
+                    <MovieItem
+                      key={movie.id}
+                      id={movie.id}
+                      posterPhoto={movie.poster_path}
+                      title={movie.title}
+                      overview={movie.overview}
+                      voteAvg={movie.vote_average}
+                    />
+                  ))}
+              </Section>
+            ) : (
+              <FuckIt>"없어씨빨"</FuckIt>
+            )
+          ) : null}
+          {tvResults ? (
+            tvResults.length > 0 ? (
+              <Section title="Movie Result">
+                {tvResults
+                  .filter(movie => movie.poster_path !== null)
+                  .map(movie => (
+                    <MovieItem
+                      key={movie.id}
+                      id={movie.id}
+                      posterPhoto={movie.poster_path}
+                      title={movie.name}
+                      overview={movie.overview}
+                      voteAvg={movie.vote_average}
+                    />
+                  ))}
+              </Section>
+            ) : null
           ) : null}
         </>
       )}
