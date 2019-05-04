@@ -14,18 +14,25 @@ export default class extends React.Component {
     let popular, topRated, airingToday, error;
     try {
       ({
-        data: { result: popular }
+        data: { results: popular }
       } = await tv.getPopular());
       ({
-        data: { result: topRated }
-      } = await tv.getTopRated());
+        data: { results: topRated }
+      } = await tv.getAiringThisWeek());
       ({
-        data: { result: airingToday }
+        data: { results: airingToday }
       } = await tv.getAiringToday());
-    } catch {
-      error = "cant get TV";
+    } catch (error) {
+      console.log(error);
+      error = "Can't get TV";
     } finally {
-      this.setState({ loading: false, popular, topRated, airingToday, error });
+      this.setState({
+        loading: false,
+        error,
+        popular,
+        topRated,
+        airingToday
+      });
     }
   }
   render() {

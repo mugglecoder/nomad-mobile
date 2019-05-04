@@ -11,33 +11,20 @@ const Title = styled.Text`
   color: white;
   font-weight: 600;
   padding-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 const ScrollView = styled.ScrollView``;
 
-const Section = ({ title, movies }) => (
+const Section = ({ title, children }) => (
   <Container>
     <Title>{title}</Title>
-    <ScrollView horizontal={true}>
-      {movies
-        .filter(movie => movie.poster_path !== null)
-        .map(movie => (
-          <MovieItem
-            key={movie.id}
-            id={movie.id}
-            posterPhoto={movie.poster_path}
-            title={movie.title}
-            voteAvg={movie.vote_average}
-          />
-        ))}
-    </ScrollView>
+    <ScrollView horizontal={true}>{children}</ScrollView>
   </Container>
 );
 
 Section.prototype = {
-  title: PropTypes.string.isRequired,
-  movies: PropTypes.array.isRequired
+  title: PropTypes.string.isRequired
 };
 
 export default Section;
