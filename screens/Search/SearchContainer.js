@@ -1,12 +1,14 @@
 import React from "react";
 import SearchPresenter from "./SearchPresenter";
+import { movies, tv } from "../../api";
 
 export default class extends React.Component {
   state = {
     loading: false,
-    movieRetults: null,
+    movieResults: null,
     tvResults: null,
-    searchTerm: ""
+    searchTerm: "",
+    error: null
   };
 
   handleSearchUpdate = text => {
@@ -15,14 +17,46 @@ export default class extends React.Component {
     });
   };
 
+  onSubmitEditing = async () => {
+    const { searchTerm } = this.state;
+    if (searchTerm !== "") {
+      let error, movieResults, tvResults;
+      this.setState({
+        loading: true
+      });
+      try {
+        ({
+          data: ({ results: movieResults } = await movies.searchMovies(
+            searchTerm
+          ))
+        });
+        ({
+          data: ({ results: tvResults } = await tv.searchTv(searchTerm))
+        });
+      } catch {
+        error = "Can't Search";
+      } finally {
+        this.setState({
+          loading: false,
+          movieResults,
+          tvResults,
+          error
+        });
+      }
+      return;
+    }
+  };
+
   render() {
-    const { loading, movieRetults, tvResults, searchTerm } = this.state;
+    const { loading, movieResults, tvResults, searchTerm } = this.state;
+    console.log(movieResults);
     return (
       <SearchPresenter
         loading={loading}
-        movieRetults={movieRetults}
+        movieResults={movieResults}
         tvResults={tvResults}
         searchTerm={searchTerm}
+        onSubmitEditing={this.onSubmitEditing}
         handleSearchUpdate={this.handleSearchUpdate}
       />
     );
